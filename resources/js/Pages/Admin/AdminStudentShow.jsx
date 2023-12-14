@@ -53,10 +53,6 @@ const AdminStudentShow = ({ auth, user }) => {
       content: user.student.nis
     },
     {
-      title: 'Tahun Masuk',
-      content: user.student.entry_year
-    },
-    {
       title: 'No. Handphone',
       content: user.phone
     }

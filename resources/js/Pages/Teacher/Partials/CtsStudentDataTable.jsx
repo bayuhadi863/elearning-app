@@ -11,8 +11,11 @@ import {
 import defaultProfile from '/public/assets/defaultProfileSquare.png';
 import DebouncedInput from '@/Components/DebouncedInput';
 import { Link, router } from '@inertiajs/react';
+import PrimaryButton from '@/Components/PrimaryButton';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 
-const CtsStudentDataTable = ({ data }) => {
+const CtsStudentDataTable = ({ data, user, kelas_id = 0 }) => {
+  const role = user.role;
   const columnHelper = createColumnHelper();
   const columns = [
     columnHelper.accessor('no', {
@@ -64,10 +67,10 @@ const CtsStudentDataTable = ({ data }) => {
 
   return (
     <div className="p-4 max-w-5xl mx-auto fill-gray-400 bg-white shadow-md rounded-xl">
-      <div className="flex justify-between mb-2">
-        <div className="text-gray-700 text-md md:text-xl font-bold">
-          Daftar Siswa
-        </div>
+      <div className="text-gray-700 text-md md:text-xl mb-2 font-bold">
+        Daftar Siswa
+      </div>
+      <div className="flex justify-between mb-2 items-center">
         <div className="flex items-center gap-1">
           <DebouncedInput
             value={globalFilter ?? ''}
@@ -76,12 +79,22 @@ const CtsStudentDataTable = ({ data }) => {
             placeholder="Cari semua kolom..."
           />
         </div>
+        {role === 'admin' && (
+          <div className="flex justify-end">
+            <Link href={`/admin/class/${kelas_id}/edit`}>
+              <PrimaryButton className="flex gap-1 items-center">
+                <AiOutlinePlusCircle /> <span>Tambah</span>
+              </PrimaryButton>
+            </Link>
+          </div>
+        )}
       </div>
+
       <div className="max-w-full overflow-x-auto pb-4">
         <table className=" w-full text-left text-gray-900 text-md text-sm">
           <thead className="bg-white">
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
+              <tr className="bg-white" key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}

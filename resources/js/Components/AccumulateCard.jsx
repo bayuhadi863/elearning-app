@@ -1,10 +1,9 @@
 import React from 'react';
-import { FaHome } from 'react-icons/fa';
 import { FaChalkboardTeacher } from 'react-icons/fa';
 import { PiStudent } from 'react-icons/pi';
 import { AiOutlineBook } from 'react-icons/ai';
 import { BsBook } from 'react-icons/bs';
-import { MdOutlineAssignmentTurnedIn } from 'react-icons/md';
+import { MdOutlineAssignmentTurnedIn, MdOutlineQuiz } from 'react-icons/md';
 import { GrScorecard } from 'react-icons/gr';
 import { SiGoogleclassroom } from 'react-icons/si';
 import { FaRegUser } from 'react-icons/fa';
@@ -17,11 +16,11 @@ const AccumulateCard = ({ title, total, detail }) => {
         <div className="col-span-1 flex justify-end">
           <div
             className={`${
-              title === 'User'
+              title === 'Guru' || title === 'Materi'
                 ? 'bg-blue-600'
-                : title === 'Materi'
+                : title === 'Siswa' || title === 'Tugas'
                 ? 'bg-red-500'
-                : title === 'Tugas'
+                : title === 'Mata Pelajaran' || title === 'Kuis'
                 ? 'bg-amber-400'
                 : title === 'Kelas'
                 ? 'bg-green-600'
@@ -42,6 +41,10 @@ const AccumulateCard = ({ title, total, detail }) => {
               <MdOutlineAssignmentTurnedIn className="text-xl text-white" />
             ) : title === 'Nilai' ? (
               <GrScorecard className="text-xl text-white" />
+            ) : title === 'Guru' ? (
+              <FaChalkboardTeacher className="text-xl text-white" />
+            ) : title === 'Kuis' ? (
+              <MdOutlineQuiz className="text-xl text-white" />
             ) : (
               ''
             )}

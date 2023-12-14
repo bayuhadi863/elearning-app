@@ -19,7 +19,6 @@ return new class extends Migration
       $table->foreign('subject_id')->references('id')->on('subjects');
       $table->unsignedBigInteger('class_id');
       $table->foreign('class_id')->references('id')->on('class');
-      $table->enum('semester', ['ganjil', 'genap']);
       $table->timestamps();
       $table->softDeletes();
     });

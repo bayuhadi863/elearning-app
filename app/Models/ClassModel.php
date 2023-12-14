@@ -10,17 +10,21 @@ class ClassModel extends Model
 {
   use HasFactory, SoftDeletes;
   protected $table = 'class';
-  protected $fillable = ['name', 'grade', 'student_entry_year', 'class_teacher_id'];
+  protected $fillable = ['name', 'grade', 'season_id', 'class_teacher_id'];
   public function teacher()
   {
     return $this->belongsTo(Teacher::class, 'class_teacher_id');
   }
-  public function studentClass()
+  public function season()
   {
-    return $this->hasMany(StudentClass::class, 'class_id');
+    return $this->belongsTo(Season::class, 'season_id');
   }
   public function cts()
   {
     return $this->hasMany(ClassTeacherSubjects::class, 'class_id');
+  }
+  public function student_class()
+  {
+    return $this->hasMany(StudentClass::class, 'class_id');
   }
 }

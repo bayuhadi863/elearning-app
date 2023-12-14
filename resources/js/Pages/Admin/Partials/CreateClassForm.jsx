@@ -2,14 +2,16 @@ import React from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 
-const CreateClassForm = ({ className = '', teachers }) => {
+const CreateClassForm = ({ className = '', teachers, seasons }) => {
+  const date = new Date();
+  const thisYear = date.getFullYear();
+
   const nameOptions = [
     { value: 'A', label: 'A' },
     { value: 'B', label: 'B' },
@@ -24,15 +26,10 @@ const CreateClassForm = ({ className = '', teachers }) => {
     { value: 'XII', label: 'XII' }
   ];
 
-  const studentEntryYearOptions = [
-    { value: 2025, label: '2025' },
-    { value: 2024, label: '2024' },
-    { value: 2023, label: '2023' },
-    { value: 2022, label: '2022' },
-    { value: 2021, label: '2021' },
-    { value: 2020, label: '2020' },
-    { value: 2019, label: '2019' }
-  ];
+  const seasonOptions = seasons.map((item) => ({
+    value: item.id,
+    label: `${item.start_year}/${item.end_year} (${item.semester})`
+  }));
 
   const classTeacherOptions = teachers.map((teacher) => ({
     value: teacher.id,
@@ -45,8 +42,8 @@ const CreateClassForm = ({ className = '', teachers }) => {
   const handleGradeChange = (selectedOption) => {
     setData('grade', selectedOption.value);
   };
-  const handleStudentEntryYearChange = (selectedOption) => {
-    setData('student_entry_year', selectedOption.value);
+  const handleSeasonChange = (selectedOption) => {
+    setData('season_id', selectedOption.value);
   };
   const handleClassTeacherChange = (selectedOption) => {
     setData('class_teacher_id', selectedOption.value);
@@ -56,7 +53,7 @@ const CreateClassForm = ({ className = '', teachers }) => {
     useForm({
       name: null,
       grade: null,
-      student_entry_year: null,
+      season_id: null,
       class_teacher_id: null
     });
 
@@ -67,7 +64,7 @@ const CreateClassForm = ({ className = '', teachers }) => {
       onSuccess: () => {
         reset('name');
         reset('grade');
-        reset('student_entry_year');
+        reset('season_id');
         reset('class_teacher_id');
         Swal.fire({
           title: 'Good job!',
@@ -114,19 +111,19 @@ const CreateClassForm = ({ className = '', teachers }) => {
         <div>
           <InputLabel
             className="mb-1"
-            htmlFor="student_entry_year"
-            value="Tahun Masuk Siswa"
+            htmlFor="season_id"
+            value="Tahun Ajaran"
           />
           <Select
-            id="student_entry_year"
+            id="season_id"
             className="basic-single"
             classNamePrefix="select"
             isSearchable={true}
             isClearable={true}
-            options={studentEntryYearOptions}
-            onChange={handleStudentEntryYearChange}
+            options={seasonOptions}
+            onChange={handleSeasonChange}
           />
-          <InputError className="mt-2" message={errors.grade} />
+          <InputError className="mt-2" message={errors.season_id} />
         </div>
         <div>
           <InputLabel
@@ -143,7 +140,7 @@ const CreateClassForm = ({ className = '', teachers }) => {
             options={classTeacherOptions}
             onChange={handleClassTeacherChange}
           />
-          <InputError className="mt-2" message={errors.grade} />
+          <InputError className="mt-2" message={errors.class_teacher_id} />
         </div>
         <div className="flex items-center gap-4">
           <PrimaryButton disabled={processing}>Save</PrimaryButton>

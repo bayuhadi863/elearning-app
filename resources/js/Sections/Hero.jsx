@@ -3,7 +3,10 @@ import LandingPageImg from '/public/assets/landing-page.png';
 
 const Hero = () => {
   return (
-    <section id='home' className="bg-white w-full pt-16 px-4 md:px-10 lg:px-24 lg:h-screen ">
+    <section
+      id="home"
+      className="bg-white w-full pt-16 px-4 md:px-10 lg:px-24 lg:h-screen "
+    >
       <div className="grid max-w-screen-xl px-0 py-8 mx-auto lg:gap-8 xl:gap-8 lg:py-16 lg:grid-cols-12">
         <div className="mr-auto place-self-center lg:col-span-7">
           <h1 className="text-gray-950 max-w-2xl mb-4 text-4xl font-extrabold leading-none md:text-4xl xl:text-5xl ">
@@ -25,9 +28,9 @@ const Hero = () => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
           </a>

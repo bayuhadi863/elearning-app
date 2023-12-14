@@ -16,7 +16,6 @@ const CreateStudentForm = ({ className = '' }) => {
       password: null,
       nisn: null,
       nis: null,
-      entry_year: null,
       phone: null
     });
 
@@ -30,7 +29,6 @@ const CreateStudentForm = ({ className = '' }) => {
         reset('password');
         reset('nisn');
         reset('nis');
-        reset('entry_year');
         reset('phone');
         Swal.fire({
           title: 'Good job!',
@@ -102,17 +100,6 @@ const CreateStudentForm = ({ className = '' }) => {
             autoComplete="nis"
           />
           <InputError className="mt-2" message={errors.nis} />
-        </div>
-        <div>
-          <InputLabel htmlFor="entry_year" value="Tahun Masuk" />
-          <TextInput
-            id="entry_year"
-            type="number"
-            className="mt-1 block w-full"
-            onChange={(e) => setData('entry_year', e.target.value)}
-            autoComplete="entry_year"
-          />
-          <InputError className="mt-2" message={errors.entry_year} />
         </div>
         <div>
           <InputLabel htmlFor="phone" value="Phone" />

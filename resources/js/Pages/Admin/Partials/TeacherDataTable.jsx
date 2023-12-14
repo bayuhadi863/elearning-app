@@ -16,8 +16,6 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { Link, router } from '@inertiajs/react';
 import Swal from 'sweetalert2';
 
-// import { SearchIcon } from "../Icons/Icons";
-
 const TeacherDataTable = ({ data }) => {
   const columnHelper = createColumnHelper();
   const columns = [
@@ -195,7 +193,7 @@ const TeacherDataTable = ({ data }) => {
         </table>
       </div>
       {/* pagination */}
-      <div className="hidden sm:flex items-center justify-end mt-2 gap-2">
+      <div className="hidden sm:flex items-center justify-end mt-2 gap-2 text-xs">
         <button
           onClick={() => {
             table.previousPage();

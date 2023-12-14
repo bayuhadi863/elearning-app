@@ -3,11 +3,16 @@ import Sidebar from '@/Components/Sidebar';
 import DashboardHeader from '@/Components/DashboardHeader';
 import { useState } from 'react';
 
-const AuthenticatedLayoutNew = ({ children, auth, headerTitle }) => {
+const AuthenticatedLayoutNew = ({
+  children,
+  auth,
+  headerTitle,
+  userCtsAll
+}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="bg-gray-100">
-      <Sidebar sidebarOpen={sidebarOpen} auth={auth} />
+      <Sidebar sidebarOpen={sidebarOpen} auth={auth} userCtsAll={userCtsAll} />
       <DashboardHeader
         auth={auth}
         setSidebarOpen={setSidebarOpen}

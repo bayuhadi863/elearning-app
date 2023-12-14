@@ -30,9 +30,13 @@ const ClassDataTable = ({ data }) => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: 'Tingkat'
     }),
-    columnHelper.accessor('student_entry_year', {
+    columnHelper.accessor('season', {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: 'Tahun Masuk Siswa'
+      header: 'Tahun Ajaran'
+    }),
+    columnHelper.accessor('semester', {
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: 'Semester'
     }),
     columnHelper.accessor('class_teacher', {
       cell: (info) => <span>{info.getValue()}</span>,

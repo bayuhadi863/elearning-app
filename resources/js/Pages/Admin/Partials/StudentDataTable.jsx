@@ -56,10 +56,6 @@ const StudentDataTable = ({ data }) => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: 'NIS'
     }),
-    columnHelper.accessor('entry_year', {
-      cell: (info) => <span>{info.getValue()}</span>,
-      header: 'Tahun Masuk'
-    }),
     columnHelper.accessor('phone', {
       cell: (info) => <span>{info.getValue()}</span>,
       header: 'No. Handphone'
@@ -142,7 +138,7 @@ const StudentDataTable = ({ data }) => {
         <div>
           <Link
             href={route('adminStudent.create')}
-            className="flex bg-blue-600 items-center py-2 px-3 hover:bg-blue-700 transition rounded-md text-white"
+            className="flex bg-blue-600 items-center gap-1 py-2 px-3 hover:bg-blue-700 transition rounded-md text-white"
           >
             <AiOutlinePlusCircle /> <span>Tambah</span>
           </Link>

@@ -3,7 +3,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { useForm } from '@inertiajs/react';
+import { useForm, router } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 import Swal from 'sweetalert2';
@@ -22,7 +22,7 @@ const CreateTeachingMaterialForm = ({ className = '', kelas }) => {
 
   const submit = (e) => {
     e.preventDefault();
-    post(`/teacher/class/${kelas.id}/materi`, {
+    post(`/teacher/materi/class/${kelas.id}`, {
       preserveScroll: true,
       onProgress: () => {
         setIsUploading(true);
@@ -37,6 +37,8 @@ const CreateTeachingMaterialForm = ({ className = '', kelas }) => {
           title: 'Good job!',
           text: 'Berhasil menambahkan data.',
           icon: 'success'
+        }).then(() => {
+          router.get(`/teacher/materi/class/${kelas.id}`);
         });
       }
     });
@@ -107,7 +109,10 @@ const CreateTeachingMaterialForm = ({ className = '', kelas }) => {
           </div>
         ) : (
           <div>
-            <InputLabel htmlFor="video_link" value="Link Video Materi" />
+            <InputLabel
+              htmlFor="video_link"
+              value="Link YouTube Video Materi"
+            />
             <TextInput
               id="video_link"
               type="text"
@@ -130,7 +135,7 @@ const CreateTeachingMaterialForm = ({ className = '', kelas }) => {
             leaveTo="opacity-0"
           >
             <p className="text-sm text-gray-700 flex items-center">
-              Uploading... 
+              Uploading...
             </p>
           </Transition>
         </div>

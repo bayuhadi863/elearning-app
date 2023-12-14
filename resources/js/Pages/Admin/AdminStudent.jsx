@@ -10,7 +10,6 @@ const AdminStudent = ({ students, auth }) => {
     email: student.email,
     nisn: student.student.nisn,
     nis: student.student.nis,
-    entry_year: student.student.entry_year,
     phone: student.phone,
     profile_picture: student.profile_picture
   }));

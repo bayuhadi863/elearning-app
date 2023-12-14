@@ -2,7 +2,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import defaultProfile from '@/Assets/defaultProfile.png';
+import defaultProfile from '/public/assets/defaultProfileSquare.png';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import gambar from '/public/assets/logo_smanda.png';

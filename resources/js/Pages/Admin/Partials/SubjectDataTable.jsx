@@ -9,11 +9,8 @@ import {
   getSortedRowModel
 } from '@tanstack/react-table';
 import DebouncedInput from '@/Components/DebouncedInput';
-import { BsEye, BsTrash3 } from 'react-icons/bs';
-import { LiaEdit } from 'react-icons/lia';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { Link, router } from '@inertiajs/react';
-import Swal from 'sweetalert2';
+import { Link } from '@inertiajs/react';
 
 const SubjectDataTable = ({ data }) => {
   const columnHelper = createColumnHelper();
@@ -25,32 +22,7 @@ const SubjectDataTable = ({ data }) => {
     columnHelper.accessor('name', {
       cell: (info) => <span>{info.getValue()}</span>,
       header: 'Nama Mata Pelajaran'
-    }),
-    {
-      cell: (info) => (
-        <div className="flex gap-1">
-          <Link
-            href={`/admin/subject/${info.row.original.id}`}
-            className="bg-amber-400 p-2 rounded hover:bg-amber-500 transition"
-          >
-            <BsEye />
-          </Link>
-          <Link
-            href={`/admin/subject/${info.row.original.id}/edit`}
-            className="bg-blue-500 p-2 rounded text-white hover:bg-blue-600 transition"
-          >
-            <LiaEdit />
-          </Link>
-          <button
-            onClick={() => handleDeleteClick(info.row.original.id)}
-            className="bg-red-500 p-2 rounded text-white hover:bg-red-600 transition"
-          >
-            <BsTrash3 />
-          </button>
-        </div>
-      ),
-      header: 'Action'
-    }
+    })
   ];
 
   const [globalFilter, setGlobalFilter] = useState('');
@@ -68,27 +40,6 @@ const SubjectDataTable = ({ data }) => {
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting
   });
-
-  const handleDeleteClick = (id) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        router.visit(`/admin/subject/${id}`, { method: 'delete' });
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success'
-        });
-      }
-    });
-  };
 
   return (
     <div className="p-4 max-w-5xl mx-auto fill-gray-400 bg-white shadow-md rounded-xl">

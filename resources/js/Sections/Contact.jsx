@@ -2,7 +2,7 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    <section id='contact' className="py-16 px-4">
+    <section id="contact" className="py-16 px-4">
       <form className="flex w-full max-w-sm space-x-3">
         <div className="w-full max-w-2xl px-5 py-10 m-auto mt-10 bg-white rounded-lg shadow border border-gray-200">
           <div className="mb-6 text-3xl font-light text-center text-gray-800">
@@ -30,7 +30,7 @@ const Contact = () => {
               </div>
             </div>
             <div className="col-span-2">
-              <label className="text-gray-700" for="name">
+              <label className="text-gray-700" htmlFor="name">
                 <textarea
                   className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   id="comment"

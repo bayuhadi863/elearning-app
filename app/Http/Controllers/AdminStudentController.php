@@ -50,8 +50,7 @@ class AdminStudentController extends Controller
         'required',
         'numeric',
         Rule::unique('students', 'nis'),
-      ],
-      'entry_year' => 'required|numeric',
+      ]
     ])->validate();
     // Simpan data pengguna
     $user = User::create([
@@ -67,7 +66,6 @@ class AdminStudentController extends Controller
       'user_id' => $userId,
       'nisn' => $request->input('nisn'),
       'nis' => $request->input('nis'),
-      'entry_year' => $request->input('entry_year'),
     ]);
 
     return redirect()->back()->with('message', 'Data berhasil dibuat');
@@ -127,7 +125,6 @@ class AdminStudentController extends Controller
         'numeric',
         Rule::unique('students', 'nis')->ignore($student->id),
       ],
-      'entry_year' => 'nullable|numeric',
     ])->validate();
     // Memeriksa apakah ada perubahan dalam input
     if ($request->input('name') != '' && $request->input('name') != $user->name) {
@@ -145,9 +142,7 @@ class AdminStudentController extends Controller
     if ($request->input('nis') != '' && $request->input('nis') != $student->nis) {
       $student->nis = $request->input('nis');
     }
-    if ($request->input('entry_year') != '' && $request->input('entry_year') != $student->entry_year) {
-      $student->entry_year = $request->input('entry_year');
-    }
+
     // Hanya menyimpan jika ada perubahan
     $user->save();
     $student->save();

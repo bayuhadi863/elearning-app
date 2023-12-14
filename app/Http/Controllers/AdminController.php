@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use App\Models\Subject;
+use App\Models\ClassModel;
+use App\Models\Teacher;
+use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
@@ -15,7 +19,17 @@ class AdminController extends Controller
 {
   public function index()
   {
-    return Inertia::render('Admin/AdminDashboard');
+    $teachers = Teacher::with('user')->get();
+    $students = Student::with('user')->get();
+    $subjects = Subject::all();
+    $classes = ClassModel::all();
+
+    return Inertia::render('Admin/AdminDashboard', [
+      'teachers' => $teachers,
+      'students' => $students,
+      'subjects' => $subjects,
+      'classes' => $classes,
+    ]);
   }
   public function show()
   {

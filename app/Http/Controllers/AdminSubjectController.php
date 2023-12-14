@@ -3,15 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Subject;
 use Inertia\Inertia;
-use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Validation\Rule;
 
 class AdminSubjectController extends Controller
 {

@@ -35,24 +35,44 @@ class AdminTeacherController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(AdminTeacherRequest $request)
+  public function store(Request $request)
   {
-    $validated = $request->validated();
+    Validator::make($request->all(), [
+      'name' => 'required|regex:/^[A-Za-z ,.]+$/|max:255',
+      'email' => [
+        'required',
+        'email',
+        Rule::unique('users', 'email'), // Pastikan email adalah unik, mengabaikan saat memeriksa data saat ini
+      ],
+      'password' => 'required|min:8|string',
+      'phone' => 'nullable|regex:/^\d{1,15}$/',
+      'nip' => [
+        'required',
+        'regex:/^\d{18}$/',
+        Rule::unique('teachers', 'nip'),
+      ],
+    ])->validate();
+
+    $user = new User;
+
     // Simpan data pengguna
-    $user = User::create([
-      'name' => $validated['name'],
-      'email' => $validated['email'],
-      'password' => Hash::make($validated['password']),
-      'role' => 'teacher',
-      'phone' => $validated['phone'],
-    ]);
-    // Dapatkan ID pengguna yang baru saja dibuat
-    $userId = $user->id;
-    // Simpan data ke dalam tabel teachers
-    Teacher::create([
-      'nip' => $validated['nip'],
-      'user_id' => $userId,
-    ]);
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+    $user->password = $request->input('password');
+    $user->role = 'teacher';
+
+    if ($request->input('phone') && $request->input('phone') != '') {
+      $user->phone = $request->input('phone');
+    }
+
+    $user->save();  // Simpan pengguna ke database
+
+    // Setelah disimpan, buat objek Teacher dan simpan
+    $teacher = new Teacher;
+    $teacher->user_id = $user->id;
+    $teacher->nip = $request->input('nip');
+    $teacher->save();
+
 
     return redirect()->back()->with('message', 'Data berhasil dibuat');
   }

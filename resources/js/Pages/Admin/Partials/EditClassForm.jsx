@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import Select from 'react-select';
 import { router } from '@inertiajs/react';
 
-const EditTeacherForm = ({ className = '', teachers, kelas}) => {
+const EditClassForm = ({ className = '', teachers, kelas, seasons }) => {
   const nameOptions = [
     { value: 'A', label: 'A' },
     { value: 'B', label: 'B' },
@@ -24,15 +24,10 @@ const EditTeacherForm = ({ className = '', teachers, kelas}) => {
     { value: 'XII', label: 'XII' }
   ];
 
-  const studentEntryYearOptions = [
-    { value: 2025, label: '2025' },
-    { value: 2024, label: '2024' },
-    { value: 2023, label: '2023' },
-    { value: 2022, label: '2022' },
-    { value: 2021, label: '2021' },
-    { value: 2020, label: '2020' },
-    { value: 2019, label: '2019' }
-  ];
+  const seasonOptions = seasons.map((item) => ({
+    value: item.id,
+    label: `${item.start_year}/${item.end_year} (${item.semester})`
+  }));
 
   const classTeacherOptions = teachers.map((teacher) => ({
     value: teacher.id,
@@ -45,8 +40,8 @@ const EditTeacherForm = ({ className = '', teachers, kelas}) => {
   const handleGradeChange = (selectedOption) => {
     setData('grade', selectedOption.value);
   };
-  const handleStudentEntryYearChange = (selectedOption) => {
-    setData('student_entry_year', selectedOption.value);
+  const handleSeasonChange = (selectedOption) => {
+    setData('season_id', selectedOption.value);
   };
   const handleClassTeacherChange = (selectedOption) => {
     setData('class_teacher_id', selectedOption.value);
@@ -56,7 +51,7 @@ const EditTeacherForm = ({ className = '', teachers, kelas}) => {
     useForm({
       name: null,
       grade: null,
-      student_entry_year: null,
+      season_id: null,
       class_teacher_id: null
     });
 
@@ -92,7 +87,7 @@ const EditTeacherForm = ({ className = '', teachers, kelas}) => {
         <h2 className="text-lg font-medium text-gray-900">Edit Data Kelas</h2>
       </header>
       <form onSubmit={submit} className="mt-6 space-y-6">
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           <div>
             <InputLabel className="mb-1" htmlFor="name" value="Nama Kelas" />
             <Select
@@ -124,20 +119,20 @@ const EditTeacherForm = ({ className = '', teachers, kelas}) => {
           <div>
             <InputLabel
               className="mb-1"
-              htmlFor="student_entry_year"
-              value="Tahun Masuk Siswa"
+              htmlFor="season_id"
+              value="Tahun Ajaran"
             />
             <Select
-              id="student_entry_year"
+              id="season_id"
               className="basic-single"
-              defaultInputValue={kelas.student_entry_year}
               classNamePrefix="select"
+              defaultInputValue={`${kelas.season.start_year}/${kelas.season.end_year} (${kelas.season.semester})`}
               isSearchable={true}
               isClearable={true}
-              options={studentEntryYearOptions}
-              onChange={handleStudentEntryYearChange}
+              options={seasonOptions}
+              onChange={handleSeasonChange}
             />
-            <InputError className="mt-2" message={errors.grade} />
+            <InputError className="mt-2" message={errors.season_id} />
           </div>
         </div>
         <div>
@@ -184,4 +179,4 @@ const EditTeacherForm = ({ className = '', teachers, kelas}) => {
   );
 };
 
-export default EditTeacherForm;
+export default EditClassForm;

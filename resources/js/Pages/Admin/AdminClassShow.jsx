@@ -5,8 +5,10 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import DangerButton from '@/Components/DangerButton';
 import { Head, Link, router } from '@inertiajs/react';
 import Swal from 'sweetalert2';
+import CtsStudentDataTable from '../Teacher/Partials/CtsStudentDataTable';
+import CtsSubjectDataTable from './Partials/CtsSubjectDataTable';
 
-const AdminTeacherShow = ({ auth, kelas, students }) => {
+const AdminTeacherShow = ({ auth, kelas, students, cts }) => {
   const handleDeleteClick = (id) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -28,6 +30,19 @@ const AdminTeacherShow = ({ auth, kelas, students }) => {
     });
   };
 
+  const datas = students.map((item, index) => ({
+    no: index + 1,
+    nis: item.student.nis,
+    name: item.student.user.name,
+    profile_picture: item.student.user.profile_picture
+  }));
+
+  const subjectDatas = cts.map((item, index) => ({
+    no: index + 1,
+    name: item.subject.name,
+    teacher_name: item.teacher.user.name
+  }));
+
   const rowTables = [
     {
       title: 'ID',
@@ -42,11 +57,15 @@ const AdminTeacherShow = ({ auth, kelas, students }) => {
       content: kelas.grade
     },
     {
-      title: 'Tahun Masuk Siswa',
-      content: kelas.student_entry_year
+      title: 'Tahun Ajaran',
+      content: `${kelas.season.start_year}/${kelas.season.end_year}`
     },
     {
-      title: 'Dosen Wali',
+      title: 'Semster',
+      content: kelas.season.semester
+    },
+    {
+      title: 'Wali Kelas',
       content: kelas.teacher.user.name
     }
   ];
@@ -54,42 +73,42 @@ const AdminTeacherShow = ({ auth, kelas, students }) => {
   return (
     <AuthenticatedLayoutNew
       auth={auth}
-      headerTitle={`Detail Kelas ${kelas.grade} ${kelas.name} (${kelas.student_entry_year})`}
+      headerTitle={`Detail Kelas ${kelas.grade} ${kelas.name}`}
     >
       <Head title="Detail Kelas" />
-      <div className="grid grid-cols-2">
-        <div className="mx-4 mb-3 p-6 bg-white rounded-xl shadow-md">
-          <div className="py-4">
-            <ProfileDetailItem rows={rowTables} />
-            {/* <ProfileDetailItem title={'Nama Kelas'} content={kelas.name} />
-            <ProfileDetailItem title={'Tingkat'} content={kelas.grade} />
-            <ProfileDetailItem
-              title={'Tahun Masuk Siswa'}
-              content={kelas.student_entry_year}
-            />
-            <ProfileDetailItem
-              title={'Dosen Wali'}
-              content={kelas.teacher.user.name}
-            /> */}
+      <div className="grid grid-cols-1 md:grid-cols-2 px-4 gap-4">
+        <div>
+          <div className="mb-4 p-6 bg-white rounded-xl shadow-md">
+            <div className="">
+              <ProfileDetailItem rows={rowTables} />
+            </div>
+            <div>
+              <Link href={`/admin/class/${kelas.id}/edit`}>
+                <PrimaryButton>Edit</PrimaryButton>
+              </Link>
+              <DangerButton
+                onClick={() => handleDeleteClick(kelas.id)}
+                className="ml-2"
+              >
+                Hapus
+              </DangerButton>
+            </div>
           </div>
           <div>
-            <Link href={`/admin/class/${kelas.id}/edit`}>
-              <PrimaryButton>Edit</PrimaryButton>
-            </Link>
-            <DangerButton
-              onClick={() => handleDeleteClick(kelas.id)}
-              className="ml-2"
-            >
-              Hapus
-            </DangerButton>
+            <CtsSubjectDataTable
+              data={subjectDatas}
+              user={auth.user}
+              kelas_id={kelas.id}
+            />
           </div>
         </div>
+
         <div>
-          {students.map((student) => (
-            <div>
-              {student.student.nis} - {student.student.user.name}
-            </div>
-          ))}
+          <CtsStudentDataTable
+            data={datas}
+            user={auth.user}
+            kelas_id={kelas.id}
+          />
         </div>
       </div>
     </AuthenticatedLayoutNew>

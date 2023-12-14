@@ -96,7 +96,7 @@ export default function Header({ page }) {
           {page === 'landingPage' ? (
             <Link
               href={route('login')}
-              className="text-lg leading-6 text-gray-700 me-4 hover:underline"
+              className="text-lg leading-6 text-white py-2 px-3 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 me-4 rounded-lg"
             >
               Log in <span aria-hidden="true"></span>
             </Link>
@@ -104,12 +104,7 @@ export default function Header({ page }) {
             ''
           )}
           {page === 'landingPage' || page === 'login' ? (
-            <Link
-              href={route('register')}
-              className="text-lg leading-6 text-white py-2 px-3 rounded-md bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 transition ease-in duration-200"
-            >
-              Register <span aria-hidden="true"></span>
-            </Link>
+            ''
           ) : (
             <Link
               href={route('login')}

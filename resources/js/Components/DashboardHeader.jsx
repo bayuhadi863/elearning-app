@@ -60,18 +60,19 @@ const DashboardHeader = ({ auth, setSidebarOpen, headerTitle }) => {
                 <p className="p-2 text-gray-900 text-center text-sm border-b border-gray-600">
                   {auth.user.name}
                 </p>
-                <Dropdown.Link
-                  href={route(
-                    auth.user.role === 'admin'
-                      ? 'adminProfile.show'
-                      : auth.user.role === 'teacher'
-                      ? 'teacherProfile.index'
-                      : 'studentProfile.show'
-                  )}
-                >
-                  <AiOutlineUser />
-                  Profile
-                </Dropdown.Link>
+                {auth.user.role === 'admin' ? (
+                  <Dropdown.Link href={route('adminProfile.show')}>
+                    <AiOutlineUser />
+                    Profile
+                  </Dropdown.Link>
+                ) : auth.user.role === 'teacher' ? (
+                  <Dropdown.Link href={route('teacherProfile.index')}>
+                    <AiOutlineUser />
+                    Profile
+                  </Dropdown.Link>
+                ) : (
+                  ''
+                )}
                 <Dropdown.Link href={route('logout')} method="post" as="button">
                   <BiLogOutCircle />
                   Log Out

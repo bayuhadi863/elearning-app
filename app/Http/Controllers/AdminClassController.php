@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\StudentClass;
+use App\Models\Season;
 use App\Models\ClassModel;
+use App\Models\ClassTeacherSubjects;
+use App\Models\Subject;
 use Inertia\Inertia;
 use App\Models\Teacher;
 use App\Models\Student;
@@ -23,7 +26,7 @@ class AdminClassController extends Controller
    */
   public function index()
   {
-    $kelas = ClassModel::with('teacher.user')->get();
+    $kelas = ClassModel::with('teacher.user', 'season')->get();
     return Inertia::render('Admin/AdminClass', [
       'kelas' => $kelas,
     ]);
@@ -34,10 +37,17 @@ class AdminClassController extends Controller
    */
   public function create()
   {
-    $teachers = Teacher::with('user')->get();
+    $teachers = Teacher::with('user')->whereDoesntHave('class', function ($query) {
+      $query->whereHas('season', function ($seasonQuery) {
+        $seasonQuery->where('is_active', true);
+      });
+    })
+      ->get();
+    $seasons = Season::all();
 
     return Inertia::render('Admin/AdminClassCreate', [
       'teachers' => $teachers,
+      'seasons' => $seasons,
     ]);
   }
 
@@ -49,14 +59,14 @@ class AdminClassController extends Controller
     Validator::make($request->all(), [
       'name' => 'required',
       'grade' => 'required',
-      'student_entry_year' => 'required',
+      'season_id' => 'required',
       'class_teacher_id' => 'required',
     ])->validate();
 
     ClassModel::create([
       'name' => $request->input('name'),
       'grade' => $request->input('grade'),
-      'student_entry_year' => $request->input('student_entry_year'),
+      'season_id' => $request->input('season_id'),
       'class_teacher_id' => $request->input('class_teacher_id'),
     ]);
 
@@ -68,9 +78,15 @@ class AdminClassController extends Controller
    */
   public function show($id)
   {
-    $kelas = ClassModel::with('teacher.user')->find($id);
+    $kelas = ClassModel::with('teacher.user', 'season')->find($id);
     $students = StudentClass::with('student.user')->where('class_id', $id)->get();
-    return Inertia::render('Admin/AdminClassShow', ['kelas' => $kelas, 'students' => $students]);
+    $cts = ClassTeacherSubjects::where('class_id', $id)->with('subject', 'teacher.user')->get();
+
+    return Inertia::render('Admin/AdminClassShow', [
+      'kelas' => $kelas,
+      'students' => $students,
+      'cts' => $cts
+    ]);
   }
 
   /**
@@ -78,14 +94,39 @@ class AdminClassController extends Controller
    */
   public function edit($id)
   {
-    $kelas = ClassModel::with('teacher.user')->find($id);
-    $teachers = Teacher::with('user')->get();
-    $students = Student::with('user')->get();
+    $kelas = ClassModel::with('teacher.user', 'season')->find($id);
+    $thisClass = ClassModel::find($id);
+
+    $teachers = Teacher::with('user')->whereDoesntHave('class', function ($query) use ($thisClass) {
+      $query->where('season_id', $thisClass->season_id);
+    })
+      ->get();
+
+    $students = Student::with('user')
+      ->whereDoesntHave('student_class', function ($query) use ($thisClass) {
+        $query->whereHas('class', function ($seasonQuery) use ($thisClass) {
+          $seasonQuery->where('season_id', $thisClass->season_id);
+        });
+      })
+      ->get();
+    $seasons = Season::all();
+    $allTeachers = Teacher::with('user')->whereDoesntHave('cts', function ($query) use ($id) {
+      $query->where('class_id', $id);
+    })
+      ->get();
+
+    $allSubjects = Subject::whereDoesntHave('cts', function ($query) use ($id) {
+      $query->where('class_id', $id);
+    })
+      ->get();;
 
     return Inertia::render('Admin/AdminClassEdit', [
       'kelas' => $kelas,
       'teachers' => $teachers,
-      'students' => $students
+      'students' => $students,
+      'allTeachers' => $allTeachers,
+      'allSubjects' => $allSubjects,
+      'seasons' => $seasons
     ]);
   }
 
@@ -110,8 +151,8 @@ class AdminClassController extends Controller
     if ($request->input('grade')) {
       $kelas->grade = $request->input('grade');
     }
-    if ($request->input('student_entry_year')) {
-      $kelas->student_entry_year = $request->input('student_entry_year');
+    if ($request->input('season_id')) {
+      $kelas->season_id = $request->input('season_id');
     }
     if ($request->input('class_teacher_id')) {
       $kelas->class_teacher_id = $request->input('class_teacher_id');
@@ -128,6 +169,17 @@ class AdminClassController extends Controller
   public function destroy($id): RedirectResponse
   {
     $kelas = ClassModel::find($id);
+    $cts = ClassTeacherSubjects::where('class_id', $id);
+    $studentClass = StudentClass::where('class_id', $id);
+
+    if ($cts) {
+      $cts->delete();
+    }
+
+    if ($studentClass) {
+      $studentClass->delete();
+    }
+
     $kelas->delete();
     return Redirect::to('/admin/class');
   }

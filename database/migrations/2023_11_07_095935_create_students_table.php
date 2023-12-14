@@ -17,7 +17,6 @@ return new class extends Migration
       $table->foreign('user_id')->references('id')->on('users');
       $table->string('nisn')->unique();
       $table->integer('nis')->unique();
-      $table->integer('entry_year');
       $table->timestamps();
       $table->softDeletes();
     });

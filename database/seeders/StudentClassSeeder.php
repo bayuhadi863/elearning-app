@@ -16,23 +16,77 @@ class StudentClassSeeder extends Seeder
   {
     DB::table('student_class')->insert([
       [
-        'student_id' => 16,
-        'class_id' => 5,
+        'class_id' => 1,
+        'student_id' => 1,
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
       ],
       [
-        'student_id' => 17,
-        'class_id' => 5,
+        'class_id' => 1,
+        'student_id' => 2,
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
       ],
       [
-        'student_id' => 18,
-        'class_id' => 5,
+        'class_id' => 1,
+        'student_id' => 3,
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
-      ]
+      ],
+      [
+        'class_id' => 4,
+        'student_id' => 1,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
+        'class_id' => 4,
+        'student_id' => 2,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
+        'class_id' => 4,
+        'student_id' => 3,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
+        'class_id' => 8,
+        'student_id' => 1,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
+        'class_id' => 8,
+        'student_id' => 2,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
+        'class_id' => 8,
+        'student_id' => 3,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
+        'class_id' => 11,
+        'student_id' => 1,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
+        'class_id' => 11,
+        'student_id' => 2,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
+      [
+        'class_id' => 11,
+        'student_id' => 3,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+      ],
     ]);
   }
 }

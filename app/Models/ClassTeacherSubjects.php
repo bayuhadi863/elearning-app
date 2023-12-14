@@ -10,7 +10,7 @@ class ClassTeacherSubjects extends Model
 {
   use HasFactory, SoftDeletes;
   protected $table = 'class_teacher_subjects';
-  protected $fillable = ['teacher_id', 'subject_id', 'class_id', 'semester'];
+  protected $fillable = ['teacher_id', 'subject_id', 'class_id'];
   public function teacher()
   {
     return $this->belongsTo(Teacher::class, 'teacher_id');
@@ -26,5 +26,13 @@ class ClassTeacherSubjects extends Model
   public function teaching_material()
   {
     return $this->hasMany(TeachingMaterial::class, 'class_teacher_subject_id');
+  }
+  public function assignment()
+  {
+    return $this->hasMany(Assignment::class, 'class_teacher_subject_id');
+  }
+  public function quiz()
+  {
+    return $this->hasMany(Quiz::class, 'class_teacher_subject_id');
   }
 }

@@ -15,7 +15,6 @@ const EditStudentForm = ({ className = '', user, student }) => {
       email: user.email,
       nisn: student.nisn,
       nis: student.nis,
-      entry_year: student.entry_year,
       phone: user.phone
     });
 
@@ -79,17 +78,6 @@ const EditStudentForm = ({ className = '', user, student }) => {
           />
           <InputError className="mt-2" message={errors.email} />
         </div>
-        {/* <div>
-          <InputLabel htmlFor="password" value="Password" />
-          <TextInput
-            id="password"
-            type="password"
-            className="mt-1 block w-full"
-            onChange={(e) => setData('password', e.target.value)}
-            autoComplete="password"
-          />
-          <InputError className="mt-2" message={errors.password} />
-        </div> */}
         <div>
           <InputLabel htmlFor="nisn" value="NISN" />
           <TextInput
@@ -113,18 +101,6 @@ const EditStudentForm = ({ className = '', user, student }) => {
             autoComplete="nis"
           />
           <InputError className="mt-2" message={errors.nis} />
-        </div>
-        <div>
-          <InputLabel htmlFor="entry_year" value="Tahun Masuk" />
-          <TextInput
-            id="entry_year"
-            type="number"
-            value={data.entry_year ? data.entry_year : ''}
-            className="mt-1 block w-full"
-            onChange={(e) => setData('entry_year', e.target.value)}
-            autoComplete="entry_year"
-          />
-          <InputError className="mt-2" message={errors.entry_year} />
         </div>
         <div>
           <InputLabel htmlFor="phone" value="Phone" />

@@ -15,7 +15,8 @@ return new class extends Migration
       $table->id();
       $table->string('name');
       $table->enum('grade', ['X', 'XI', 'XII']);
-      $table->integer('student_entry_year');
+      $table->unsignedBigInteger('season_id');
+      $table->foreign('season_id')->references('id')->on('seasons');
       $table->unsignedBigInteger('class_teacher_id');
       $table->foreign('class_teacher_id')->references('id')->on('teachers');
       $table->timestamps();
