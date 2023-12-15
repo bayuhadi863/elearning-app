@@ -1,5 +1,9 @@
 <h1 style="color: blue;">Smanda iLearn</h1>
 
+## Live Demo
+You can visit http://smandailearn.my.id
+this hosting is active only for 1 month (end around 10 January 2024).
+
 ## About Smanda iLearn
 
 Smanda iLearn is a web-based Learning Management System application. This
@@ -11,14 +15,23 @@ this project, the target is set for SMAN 1 Pandaan, Pasuruan, which is the high
 school I attended. Nevertheless, this application can be used for high schools,
 junior high schools, or elementary schools anywhere.
 
-## About Laravel
+## Landing Page and Login Page
+![Alt text](image-1.png)
+![Alt text](image-2.png)
 
-Laravel is a web application framework with expressive, elegant syntax. We
-believe development must be an enjoyable and creative experience to be truly
-fulfilling. Laravel takes the pain out of development by easing common tasks
-used in many web projects, such as:
+## Role
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
+This application has users with various roles, namely administrator (admin), teacher, and student. 
+
+- Admin
+![Alt text](image-3.png)
+![Alt text](image-4.png)
+The admin is responsible for managing the main data of the application, such as teacher data, student data, subjects, academic years, and class data, including class teachers, students, and subjects within each class.
+Admin account in this application:
+email: bayuhadi863@gmail.com
+password: 12345678
+
+
 - [Powerful dependency injection container](https://laravel.com/docs/container).
 - Multiple back-ends for [session](https://laravel.com/docs/session) and
   [cache](https://laravel.com/docs/cache) storage.
