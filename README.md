@@ -2,8 +2,8 @@
 
 ## Live Demo
 
-You can visit http://smandailearn.my.id this hosting is active only for 1 month
-(end around 10 January 2024).
+You can visit http://smandailearn.my.id <br> this hosting is active only for 1
+month (end around 10 January 2024).
 
 ## About Smanda iLearn
 
@@ -28,8 +28,8 @@ teacher, and student.
 - Admin ![Alt text](image-3.png) ![Alt text](image-4.png) The admin is
   responsible for managing the main data of the application, such as teacher
   data, student data, subjects, academic years, and class data, including class
-  teachers, students, and subjects within each class. Admin account in this
-  application: email: bayuhadi863@gmail.com password: 12345678
+  teachers, students, and subjects within each class. <br> Admin account in this
+  application: <br> email: bayuhadi863@gmail.com <br> password: 12345678
 
 - [Powerful dependency injection container](https://laravel.com/docs/container).
 - Multiple back-ends for [session](https://laravel.com/docs/session) and
