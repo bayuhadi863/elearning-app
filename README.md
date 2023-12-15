@@ -25,81 +25,23 @@ junior high schools, or elementary schools anywhere.
 This application has users with various roles, namely administrator (admin),
 teacher, and student.
 
-- Admin ![Alt text](image-3.png) ![Alt text](image-4.png) The admin is
-  responsible for managing the main data of the application, such as teacher
-  data, student data, subjects, academic years, and class data, including class
-  teachers, students, and subjects within each class. <br> Admin account in this
-  application: <br> email: bayuhadi863@gmail.com <br> password: 12345678
+- Admin <br> ![Alt text](image-3.png) <br> ![Alt text](image-4.png) <br> The
+  admin is responsible for managing the main data of the application, such as
+  teacher data, student data, subjects, academic years, and class data,
+  including class teachers, students, and subjects within each class. <br> Admin
+  account in this application: <br> email: bayuhadi863@gmail.com <br> password:
+  12345678
 
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and
-  [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Teacher <br> ![Alt text](image-5.png) <br> ![Alt text](image-6.png) <br>
+  Teachers are responsible for uploading materials, uploading assignments,
+  creating quizzes, and providing grades. In addition, teachers can also view
+  uploaded material or assignment files and perform actions such as deletion and
+  other CRUD processes. <br> Example of teacher account in this application:
+  <br> email: ainur@gmail.com <br> password: RHSmau123
 
-![Alt text](image.png)
-
-Laravel is accessible, powerful, and provides tools required for large, robust
-applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough
-[documentation](https://laravel.com/docs) and video tutorial library of all
-modern web application frameworks, making it a breeze to get started with the
-framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you
-will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help.
-Laracasts contains over 2000 video tutorials on a range of topics including
-Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging
-into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel
-development. If you are interested in becoming a sponsor, please visit the
-Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The
-contribution guide can be found in the
-[Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review
-and abide by the
-[Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail
-to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All
-security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the
-[MIT license](https://opensource.org/licenses/MIT).
+- Student <br> ![Alt text](image-7.png) <br> ![Alt text](image-8.png) <br>
+  ![Alt text](image-9.png) <br> Students have access to view materials,
+  assignments, and grades. Additionally, they can submit assignments by
+  uploading their submission files. They can also download files uploaded by
+  teachers. <br> Example of student account in this application: <br> email:
+  irfan@gmail.com <br> password: RHSmau123
